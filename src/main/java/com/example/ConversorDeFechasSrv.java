@@ -17,4 +17,6 @@ public interface ConversorDeFechasSrv {
 
     Timestamp convertirDateATimestamp(Date fecha);
 
+    String convertirFecha(String fecha, String formatoEntrada, String formatoSalida);
+
 }

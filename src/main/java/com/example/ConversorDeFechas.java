@@ -8,11 +8,12 @@ import java.time.format.DateTimeFormatter;
 
 public class ConversorDeFechas implements ConversorDeFechasSrv {
 
-public static String convertirFecha(String fecha, String formatoEntrada, String formatoSalida) {
-        DateTimeFormatter formatterEntrada = DateTimeFormatter.ofPattern(formatoEntrada);
-        DateTimeFormatter formatterSalida = DateTimeFormatter.ofPattern(formatoSalida);
-        LocalDate fechaLocalDate = LocalDate.parse(fecha, formatterEntrada);
-        return fechaLocalDate.format(formatterSalida);
+@Override
+public String convertirFecha(String fecha, String formatoEntrada, String formatoSalida) {
+    DateTimeFormatter formatterEntrada = DateTimeFormatter.ofPattern(formatoEntrada);
+    DateTimeFormatter formatterSalida = DateTimeFormatter.ofPattern(formatoSalida);
+    LocalDate fechaLocalDate = LocalDate.parse(fecha, formatterEntrada);
+    return fechaLocalDate.format(formatterSalida);
 }
 
 @Override
@@ -62,9 +63,5 @@ public Timestamp convertirDateATimestamp(Date fecha) {
     return Timestamp.valueOf(fecha.toLocalDate().atStartOfDay());
 }
 
-public static void main(String[] args) {
-   Timestamp a = Timestamp.valueOf(LocalDateTime.parse("01/01/0001 00:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
-    System.out.println("Fecha convertida: " + a);
-}
 
 }
