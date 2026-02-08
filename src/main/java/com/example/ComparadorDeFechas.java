@@ -75,38 +75,17 @@ public class ComparadorDeFechas implements ComparadorDeFechasSrv {
 
     @Override
     public boolean esMayorQue(BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin) {
-        if (BigDecimal.ZERO.compareTo(fechaInicio) == 0 ) {
-            if (BigDecimal.ZERO.compareTo(fechaFin) == 0 ) {
-                return true;
-            } else {
-                return false;
-            }
-        } 
-        return getDate(fechaInicio, formatoInicio).isAfter(getDate(fechaFin, formatoFin));
+        return this.esMayorQue(fechaInicio.toString(), formatoInicio, fechaFin.toString(), formatoFin);
     }
 
     @Override
     public boolean esMenorQue(BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin) {
-        if (BigDecimal.ZERO.compareTo(fechaInicio) == 0 ) {
-            if (BigDecimal.ZERO.compareTo(fechaFin) == 0 ) {
-                return true;
-            } else {
-                return false;
-            }
-        } 
-        return getDate(fechaInicio, formatoInicio).isBefore(getDate(fechaFin, formatoFin));
+        return this.esMenorQue(fechaInicio.toString(), formatoInicio, fechaFin.toString(), formatoFin);
     }
 
     @Override
     public boolean esIgualQue(BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin) {
-        if (BigDecimal.ZERO.compareTo(fechaInicio) == 0 ) {
-            if (BigDecimal.ZERO.compareTo(fechaFin) == 0 ) {
-                return true;
-            } else {
-                return false;
-            }
-        } 
-        return getDate(fechaInicio, formatoInicio).equals(getDate(fechaFin, formatoFin));
+        return this.esIgualQue(fechaInicio.toString(), formatoInicio, fechaFin.toString(), formatoFin);
     }
     
 
@@ -238,7 +217,7 @@ public class ComparadorDeFechas implements ComparadorDeFechasSrv {
 
     private LocalDate getDate(BigDecimal fecha, String formato) {
         if (BigDecimal.ZERO.compareTo(fecha) == 0 ) {
-            return LocalDate.parse(new BigDecimal("01/01/0001").toPlainString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return LocalDate.parse("01/01/0001", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } 
         return LocalDate.parse(fecha.toPlainString(), DateTimeFormatter.ofPattern(formato));
     }
