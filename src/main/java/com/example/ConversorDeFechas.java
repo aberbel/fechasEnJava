@@ -27,9 +27,9 @@ public Timestamp convertirStringATimestamp(String fecha, String formato) {
 @Override
 public Date convertirStringADate(String fecha, String formato) {
     if ("0".equals(fecha) || fecha.isEmpty()){
-        return Date.valueOf(LocalDateTime.parse("01/01/0001 00:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).toLocalDate());
+        return Date.valueOf(LocalDate.parse("01/01/0001", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
-    return Date.valueOf(LocalDateTime.parse(fecha, DateTimeFormatter.ofPattern(formato)).toLocalDate());
+        return Date.valueOf(LocalDate.parse(fecha, DateTimeFormatter.ofPattern(formato)));
 }
 
 @Override

@@ -19,7 +19,7 @@ Es un comparador y un conversor de fechas en java.
 | **esMenorQue** (Date) | `Date fechaInicio, Date fechaFin` | `esMenorQue(Date.valueOf("2025-02-05"), Date.valueOf("2025-02-10"))` → `true` | `esMenorQue(Date.valueOf("2025-02-15"), Date.valueOf("2025-02-10"))` → `false` | `esMenorQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))` → `false` |
 | **esIgualQue** (Date) | `Date fechaInicio, Date fechaFin` | `esIgualQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))` → `true` | `esIgualQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-15"))` → `false` | `esIgualQue(Date.valueOf("2025-02-20"), Date.valueOf("2025-02-20"))` → `true` |
 
-## Métodos @Override de ConversorDeFechas
+## Métodos de Conversor De Fechas
 
 | Método | Parámetros | Ejemplo 1 | Ejemplo 2 | Ejemplo 3 (Casos especiales) |
 |--------|-----------|----------|----------|----------|
