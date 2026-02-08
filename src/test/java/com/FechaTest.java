@@ -11,15 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.example.ComparadorDeFechas;
-import com.example.ComparadorDeFechas;
-
 public class FechaTest {
 
     private ComparadorDeFechas fecha1;
     private ComparadorDeFechas fecha2;
     private ComparadorDeFechas fecha3;
-    private ComparadorDeFechas fecha4;
-    private ComparadorDeFechas fecha5;
 
 
     private Timestamp ts1; // 2026-02-07 08:30:45
@@ -52,8 +48,6 @@ public class FechaTest {
         fecha1 = new ComparadorDeFechas(ts1); // 2026-02-07 08:30:45
         fecha2 = new ComparadorDeFechas(ts2); // 2026-02-07 14:15:30
         fecha3 = new ComparadorDeFechas(ts5); // 2026-02-08 05:30:00
-        fecha4 = new ComparadorDeFechas(ts4); // 2026-02-06 10:00:00
-        fecha5 = new ComparadorDeFechas(ts3); // 2026-02-07 23
     }
 
     // ====== TESTS CON TIMESTAMP ======
