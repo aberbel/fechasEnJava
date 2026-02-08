@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación - Fechas En Java</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav a {
+            padding: 10px 20px;
+            text-decoration: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        nav a:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        
+        nav a.active {
+            background: #764ba2;
+        }
+        
+        .content {
+            padding: 40px 20px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .code {
+            background: #f4f4f4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+        
+        .example {
+            background: #e7f3ff;
+            padding: 15px;
+            border-left: 4px solid #2196F3;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .coverage-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .coverage-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .coverage-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .coverage-label {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .stats h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .stats p {
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+            margin-top: 40px;
+        }
+        
+        .method-table {
+            font-size: 0.95em;
+        }
+        
+        .method-table td {
+            word-break: break-word;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            nav {
+                flex-direction: column;
+            }
+            
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            td, th {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 Fechas En Java</h1>
+            <p>Documentación Completa del Proyecto</p>
+        </header>
+        
+        <nav>
+            <a onclick="showSection('inicio')" class="nav-link active">Inicio</a>
+            <a onclick="showSection('comparador')" class="nav-link">ComparadorDeFechas</a>
+            <a onclick="showSection('conversor')" class="nav-link">ConversorDeFechas</a>
+            <a onclick="showSection('cobertura')" class="nav-link">Cobertura</a>
+            <a onclick="showSection('tests')" class="nav-link">Tests</a>
+        </nav>
+        
+        <div class="content">
+            <!-- Sección Inicio -->
+            <div id="inicio" class="section active">
+                <h2>Bienvenido</h2>
+                <div class="description">
+                    <p>Este es un proyecto Java que proporciona utilidades para comparar y convertir fechas en diferentes formatos y tipos de datos.</p>
+                </div>
+                
+                <h3>Descripción General</h3>
+                <div class="stats">
+                    <h4>Información del Proyecto</h4>
+                    <p><strong>Nombre:</strong> Fechas En Java</p>
+                    <p><strong>Versión:</strong> 1.0-SNAPSHOT</p>
+                    <p><strong>Lenguaje:</strong> Java 17</p>
+                    <p><strong>Build Tool:</strong> Maven</p>
+                    <p><strong>Framework de Tests:</strong> JUnit Jupiter 5.9.3</p>
+                </div>
+                
+                <h3>Componentes Principales</h3>
+                <div class="stats">
+                    <h4>Clases Principales</h4>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea;">
+                            <strong style="color: #667eea;">ComparadorDeFechas</strong>
+                            <p style="margin-top: 8px; color: #666;">Utilidad para comparar fechas en diferentes formatos y tipos de datos (String, BigDecimal, Date, Timestamp).</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #764ba2;">
+                            <strong style="color: #764ba2;">ConversorDeFechas</strong>
+                            <p style="margin-top: 8px; color: #666;">Utilidad para convertir fechas entre diferentes formatos y tipos de datos.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Características</h3>
+                <div style="display: grid; gap: 10px;">
+                    <span class="badge badge-success">✓ 54 Tests Unitarios</span>
+                    <span class="badge badge-success">✓ 99.25% Cobertura de Instrucciones</span>
+                    <span class="badge badge-success">✓ 100% Métodos Cubiertos</span>
+                    <span class="badge badge-info">ℹ Soporta múltiples formatos de fecha</span>
+                    <span class="badge badge-info">ℹ Compatibilidad con java.time y java.sql</span>
+                </div>
+            </div>
+            
+            <!-- Sección ComparadorDeFechas -->
+            <div id="comparador" class="section">
+                <h2>ComparadorDeFechas</h2>
+                <div class="description">
+                    <p>Clase utilidad para comparar fechas en diferentes formatos y tipos de datos. Soporta comparaciones con BigDecimal, String, Date y Timestamp.</p>
+                </div>
+                
+                <h3>Métodos Soportados</h3>
+                <div style="overflow-x: auto;">
+                    <table class="method-table">
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Parámetros</th>
+                                <th>Ejemplo 1</th>
+                                <th>Ejemplo 2</th>
+                                <th>Ejemplo 3 (Edge Case)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>esMayorQue</strong> (BigDecimal)</td>
+                                <td><span class="code">BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMayorQue(new BigDecimal("15/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMayorQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMenorQue</strong> (BigDecimal)</td>
+                                <td><span class="code">BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMenorQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMenorQue(new BigDecimal("15/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMenorQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esIgualQue</strong> (BigDecimal)</td>
+                                <td><span class="code">BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esIgualQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esIgualQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("15/02/2025"), "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esIgualQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("05/02/2025"), "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMayorQue</strong> (String)</td>
+                                <td><span class="code">String fechaInicio, String formatoInicio, String fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMayorQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMayorQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMayorOIgualQue</strong> (String)</td>
+                                <td><span class="code">String fechaInicio, String formatoInicio, String fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMayorOIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorOIgualQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorOIgualQue("05/02/2025", "dd/MM/yyyy", "05/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMenorQue</strong> (String)</td>
+                                <td><span class="code">String fechaInicio, String formatoInicio, String fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMenorQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMenorQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMenorQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMenorOIgualQue</strong> (String)</td>
+                                <td><span class="code">String fechaInicio, String formatoInicio, String fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esMenorOIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMenorOIgualQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMenorOIgualQue("15/02/2025", "dd/MM/yyyy", "15/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esIgualQue</strong> (String)</td>
+                                <td><span class="code">String fechaInicio, String formatoInicio, String fechaFin, String formatoFin</span></td>
+                                <td><span class="code">esIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esIgualQue("10/02/2025", "dd/MM/yyyy", "15/02/2025", "dd/MM/yyyy")</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esIgualQue("20/02/2025", "dd/MM/yyyy", "20/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">true</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMayorQue</strong> (Timestamp)</td>
+                                <td><span class="code">Timestamp fechaInicio, Timestamp fechaFin</span></td>
+                                <td><span class="code">esMayorQue(Timestamp.valueOf("2025-02-15 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorQue(Timestamp.valueOf("2025-02-05 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMayorQue(Timestamp.valueOf("2025-02-10 14:45:00"), Timestamp.valueOf("2025-02-10 09:15:00"))</span> → <span class="badge">false</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>esMayorQue</strong> (Date)</td>
+                                <td><span class="code">Date fechaInicio, Date fechaFin</span></td>
+                                <td><span class="code">esMayorQue(Date.valueOf("2025-02-15"), Date.valueOf("2025-02-10"))</span> → <span class="badge badge-success">true</span></td>
+                                <td><span class="code">esMayorQue(Date.valueOf("2025-02-05"), Date.valueOf("2025-02-10"))</span> → <span class="badge">false</span></td>
+                                <td><span class="code">esMayorQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))</span> → <span class="badge">false</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Sección ConversorDeFechas -->
+            <div id="conversor" class="section">
+                <h2>ConversorDeFechas</h2>
+                <div class="description">
+                    <p>Clase utilidad para convertir fechas entre diferentes formatos y tipos de datos. Soporta conversiones con String, BigDecimal, Date y Timestamp.</p>
+                </div>
+                
+                <h3>Métodos Soportados</h3>
+                <div style="overflow-x: auto;">
+                    <table class="method-table">
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Parámetros</th>
+                                <th>Ejemplo 1</th>
+                                <th>Ejemplo 2</th>
+                                <th>Ejemplo 3 (Casos especiales)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>convertirFecha</strong></td>
+                                <td><span class="code">String fecha, String formatoEntrada, String formatoSalida</span></td>
+                                <td><span class="code">convertirFecha("15/02/2025", "dd/MM/yyyy", "yyyy-MM-dd")</span> → <span class="badge badge-success">"2025-02-15"</span></td>
+                                <td><span class="code">convertirFecha("2025-02-10", "yyyy-MM-dd", "dd/MM/yyyy")</span> → <span class="badge badge-success">"10/02/2025"</span></td>
+                                <td><span class="code">convertirFecha("01/01/0001", "dd/MM/yyyy", "yyyy-MM-dd")</span> → <span class="badge badge-success">"0001-01-01"</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirStringATimestamp</strong></td>
+                                <td><span class="code">String fecha, String formatoEntrada</span></td>
+                                <td><span class="code">convertirStringATimestamp("15/02/2025 14:30:45", "dd/MM/yyyy HH:mm:ss")</span> → <span class="badge badge-success">Timestamp(2025-02-15 14:30:45)</span></td>
+                                <td><span class="code">convertirStringATimestamp("2025-02-10 09:15:00", "yyyy-MM-dd HH:mm:ss")</span> → <span class="badge badge-success">Timestamp(2025-02-10 09:15:00)</span></td>
+                                <td><span class="code">convertirStringATimestamp("0", "dd/MM/yyyy HH:mm:ss")</span> → <span class="badge badge-success">Timestamp(0001-01-01 00:00:00)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirStringADate</strong></td>
+                                <td><span class="code">String fecha, String formatoEntrada</span></td>
+                                <td><span class="code">convertirStringADate("15/02/2025", "dd/MM/yyyy")</span> → <span class="badge badge-success">Date(2025-02-15)</span></td>
+                                <td><span class="code">convertirStringADate("2025-02-10", "yyyy-MM-dd")</span> → <span class="badge badge-success">Date(2025-02-10)</span></td>
+                                <td><span class="code">convertirStringADate("", "dd/MM/yyyy")</span> → <span class="badge badge-success">Date(0001-01-01)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirTimestampAString</strong></td>
+                                <td><span class="code">Timestamp fecha, String formatoSalida</span></td>
+                                <td><span class="code">convertirTimestampAString(Timestamp.valueOf("2025-02-15 14:30:00"), "dd/MM/yyyy HH:mm:ss")</span> → <span class="badge badge-success">"15/02/2025 14:30:00"</span></td>
+                                <td><span class="code">convertirTimestampAString(Timestamp.valueOf("2025-02-10 09:15:00"), "yyyy-MM-dd")</span> → <span class="badge badge-success">"2025-02-10"</span></td>
+                                <td><span class="code">convertirTimestampAString(Timestamp.valueOf("0001-01-01 00:00:00"), "dd/MM/yyyy")</span> → <span class="badge badge-success">""</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirDateAString</strong></td>
+                                <td><span class="code">Date fecha, String formatoSalida</span></td>
+                                <td><span class="code">convertirDateAString(Date.valueOf("2025-02-15"), "dd/MM/yyyy")</span> → <span class="badge badge-success">"15/02/2025"</span></td>
+                                <td><span class="code">convertirDateAString(Date.valueOf("2025-02-10"), "yyyy-MM-dd")</span> → <span class="badge badge-success">"2025-02-10"</span></td>
+                                <td><span class="code">convertirDateAString(Date.valueOf("0001-01-01"), "dd/MM/yyyy")</span> → <span class="badge badge-success">""</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirTimestampADate</strong></td>
+                                <td><span class="code">Timestamp fecha</span></td>
+                                <td><span class="code">convertirTimestampADate(Timestamp.valueOf("2025-02-15 14:30:00"))</span> → <span class="badge badge-success">Date(2025-02-15)</span></td>
+                                <td><span class="code">convertirTimestampADate(Timestamp.valueOf("2025-02-10 09:15:00"))</span> → <span class="badge badge-success">Date(2025-02-10)</span></td>
+                                <td><span class="code">convertirTimestampADate(Timestamp.valueOf("0001-01-01 00:00:00"))</span> → <span class="badge badge-success">Date(0001-01-01)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>convertirDateATimestamp</strong></td>
+                                <td><span class="code">Date fecha</span></td>
+                                <td><span class="code">convertirDateATimestamp(Date.valueOf("2025-02-15"))</span> → <span class="badge badge-success">Timestamp(2025-02-15 00:00:00)</span></td>
+                                <td><span class="code">convertirDateATimestamp(Date.valueOf("2025-02-10"))</span> → <span class="badge badge-success">Timestamp(2025-02-10 00:00:00)</span></td>
+                                <td><span class="code">convertirDateATimestamp(Date.valueOf("0001-01-01"))</span> → <span class="badge badge-success">Timestamp(0001-01-01 00:00:00)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Sección Cobertura -->
+            <div id="cobertura" class="section">
+                <h2>Cobertura de Tests</h2>
+                <div class="description">
+                    <p>Métricas detalladas de cobertura de código generadas con JaCoCo. El proyecto mantiene una cobertura muy alta con especial énfasis en métodos críticos.</p>
+                </div>
+                
+                <h3>Métricas Generales</h3>
+                <div class="coverage-grid">
+                    <div class="coverage-card">
+                        <h4>Instrucciones</h4>
+                        <div class="coverage-value">99.25%</div>
+                        <div class="coverage-label">Líneas de código ejecutadas</div>
+                    </div>
+                    <div class="coverage-card">
+                        <h4>Ramas</h4>
+                        <div class="coverage-value">82.65%</div>
+                        <div class="coverage-label">Caminos de decisión</div>
+                    </div>
+                    <div class="coverage-card">
+                        <h4>Líneas</h4>
+                        <div class="coverage-value">97.80%</div>
+                        <div class="coverage-label">Líneas tocadas</div>
+                    </div>
+                    <div class="coverage-card">
+                        <h4>Métodos</h4>
+                        <div class="coverage-value">100%</div>
+                        <div class="coverage-label">Métodos con tests</div>
+                    </div>
+                </div>
+                
+                <h3>Cobertura por Clase</h3>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Clase</th>
+                                <th>Instrucciones</th>
+                                <th>Ramas</th>
+                                <th>Líneas</th>
+                                <th>Complejidad</th>
+                                <th>Métodos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ComparadorDeFechas</strong></td>
+                                <td><span class="badge badge-success">98.98%</span></td>
+                                <td><span class="badge badge-info">77.03%</span></td>
+                                <td><span class="badge badge-success">97.06%</span></td>
+                                <td><span class="badge badge-info">75.36%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>ConversorDeFechas</strong></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                            </tr>
+                            <tr style="background: #fff3cd; font-weight: bold;">
+                                <td>TOTAL</td>
+                                <td><span class="badge badge-success">99.25%</span></td>
+                                <td><span class="badge badge-info">82.65%</span></td>
+                                <td><span class="badge badge-success">97.80%</span></td>
+                                <td><span class="badge badge-info">80.90%</span></td>
+                                <td><span class="badge badge-success">100%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="stats">
+                    <h4>Descripción de Métricas</h4>
+                    <p><strong>Instrucciones:</strong> Porcentaje de líneas de código que fueron ejecutadas durante las pruebas unitarias.</p>
+                    <p><strong>Ramas:</strong> Porcentaje de caminos de decisión (sentencias if/else) que fueron cubiertos por los tests.</p>
+                    <p><strong>Líneas:</strong> Porcentaje de líneas de código fuente que fueron ejecutadas.</p>
+                    <p><strong>Complejidad:</strong> Cobertura de complejidad ciclomática del código.</p>
+                    <p><strong>Métodos:</strong> Porcentaje de métodos que poseen al menos un test que los ejecuta.</p>
+                </div>
+            </div>
+            
+            <!-- Sección Tests -->
+            <div id="tests" class="section">
+                <h2>Suite de Tests</h2>
+                <div class="description">
+                    <p>El proyecto incluye una suite completa de tests unitarios para validar el funcionamiento de todos los componentes.</p>
+                </div>
+                
+                <h3>Resumen de Tests</h3>
+                <div class="stats">
+                    <h4>Estadísticas Generales</h4>
+                    <p><strong>Total de Tests:</strong> 54 pruebas ✅</p>
+                    <p><strong>Tests Pasados:</strong> 54</p>
+                    <p><strong>Tests Fallidos:</strong> 0</p>
+                    <p><strong>Tasa de Éxito:</strong> 100%</p>
+                </div>
+                
+                <h3>Clases de Test</h3>
+                <div style="display: grid; gap: 15px; margin-top: 20px;">
+                    <div style="background: #e7f3ff; padding: 20px; border-left: 4px solid #2196F3; border-radius: 5px;">
+                        <h4 style="color: #1976d2; margin-bottom: 10px;">ComparadorDeFechasOverrideTest</h4>
+                        <p><strong>Tests:</strong> 15</p>
+                        <p style="margin-top: 10px; color: #666;">Tests especializados en los métodos @Override de ComparadorDeFechas, incluyendo validaciones de null, strings vacíos y comparaciones con BigDecimal.ZERO.</p>
+                        <span class="badge badge-success" style="margin-top: 10px;">✓ Todo pasando</span>
+                    </div>
+                    
+                    <div style="background: #f3e5f5; padding: 20px; border-left: 4px solid #7b1fa2; border-radius: 5px;">
+                        <h4 style="color: #6a1b9a; margin-bottom: 10px;">ConversorDeFechasTest</h4>
+                        <p><strong>Tests:</strong> 20</p>
+                        <p style="margin-top: 10px; color: #666;">Tests exhaustivos para la clase ConversorDeFechas, validando conversiones entre diferentes formatos, tipos de datos y casos especiales.</p>
+                        <span class="badge badge-success" style="margin-top: 10px;">✓ Todo pasando</span>
+                    </div>
+                    
+                    <div style="background: #e8f5e9; padding: 20px; border-left: 4px solid #388e3c; border-radius: 5px;">
+                        <h4 style="color: #1b5e20; margin-bottom: 10px;">FechaTest</h4>
+                        <p><strong>Tests:</strong> 19</p>
+                        <p style="margin-top: 10px; color: #666;">Tests para validar la funcionalidad de comparación de fechas con diferentes tipos de datos (Timestamp, Date, BigDecimal).</p>
+                        <span class="badge badge-success" style="margin-top: 10px;">✓ Todo pasando</span>
+                    </div>
+                </div>
+                
+                <h3>Ejecución de Tests</h3>
+                <div class="stats">
+                    <h4>Comando Maven</h4>
+                    <div class="example">$ mvn test</div>
+                    <h4 style="margin-top: 20px;">Output Esperado</h4>
+                    <div class="example">
+[INFO] Tests run: 54, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+                    </div>
+                </div>
+                
+                <h3>Tipos de Tests Incluidos</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea;">
+                        <strong>Casos Normales</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Validación de comportamiento en condiciones estándar</p>
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #764ba2;">
+                        <strong>Casos Edge</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Pruebas con valores límite y especiales</p>
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea;">
+                        <strong>Valores Nulos</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Validación de manejo de null pointers</p>
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #764ba2;">
+                        <strong>Strings Vacíos</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Pruebas con cadenas sin contenido</p>
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea;">
+                        <strong>Formatos Múltiples</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Validación con diferentes formatos de fecha</p>
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; border-left: 4px solid #764ba2;">
+                        <strong>Tipos de Datos</strong>
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Pruebas con String, Date, Timestamp, BigDecimal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📅 Fechas En Java - Documentación Completa</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Última actualización: 08 de Febrero de 2026</p>
+            <p style="margin-top: 10px; font-size: 0.85em; color: #999;">Java 17 • Maven • JUnit Jupiter 5.9.3</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar nav activo
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

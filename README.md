@@ -1,43 +1,9 @@
 # Fechas En Java
+
 Es un comparador y un conversor de fechas en java.
-## Métodos ComparadorDeFechas con cuatro parámetros
 
-| Método | Parámetros | Ejemplo 1 | Ejemplo 2 | Ejemplo 3 (Fechas iguales) |
-|--------|-----------|----------|----------|----------|
-| **esMayorQue** (BigDecimal) | `BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin` | `esMayorQue(new BigDecimal("15/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `true` | `esMayorQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `false` | `esMayorQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `false` |
-| **esMenorQue** (BigDecimal) | `BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin` | `esMenorQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `true` | `esMenorQue(new BigDecimal("15/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `false` | `esMenorQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `false` |
-| **esIgualQue** (BigDecimal) | `BigDecimal fechaInicio, String formatoInicio, BigDecimal fechaFin, String formatoFin` | `esIgualQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("10/02/2025"), "dd/MM/yyyy")` → `true` | `esIgualQue(new BigDecimal("10/02/2025"), "dd/MM/yyyy", new BigDecimal("15/02/2025"), "dd/MM/yyyy")` → `false` | `esIgualQue(new BigDecimal("05/02/2025"), "dd/MM/yyyy", new BigDecimal("05/02/2025"), "dd/MM/yyyy")` → `true` |
-| **esMayorQue** (String) | `String fechaInicio, String formatoInicio, String fechaFin, String formatoFin` | `esMayorQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMayorQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `false` | `esMayorQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `false` |
-| **esMayorOIgualQue** (String) | `String fechaInicio, String formatoInicio, String fechaFin, String formatoFin` | `esMayorOIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMayorOIgualQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMayorOIgualQue("05/02/2025", "dd/MM/yyyy", "05/02/2025", "dd/MM/yyyy")` → `true` |
-| **esMenorQue** (String) | `String fechaInicio, String formatoInicio, String fechaFin, String formatoFin` | `esMenorQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMenorQue("15/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `false` | `esMenorQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `false` |
-| **esMenorOIgualQue** (String) | `String fechaInicio, String formatoInicio, String fechaFin, String formatoFin` | `esMenorOIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMenorOIgualQue("05/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esMenorOIgualQue("15/02/2025", "dd/MM/yyyy", "15/02/2025", "dd/MM/yyyy")` → `true` |
-| **esIgualQue** (String) | `String fechaInicio, String formatoInicio, String fechaFin, String formatoFin` | `esIgualQue("10/02/2025", "dd/MM/yyyy", "10/02/2025", "dd/MM/yyyy")` → `true` | `esIgualQue("10/02/2025", "dd/MM/yyyy", "15/02/2025", "dd/MM/yyyy")` → `false` | `esIgualQue("20/02/2025", "dd/MM/yyyy", "20/02/2025", "dd/MM/yyyy")` → `true` |
-| **esMayorQue** (Timestamp) | `Timestamp fechaInicio, Timestamp fechaFin` | `esMayorQue(Timestamp.valueOf("2025-02-15 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))` → `true` | `esMayorQue(Timestamp.valueOf("2025-02-05 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))` → `false` | `esMayorQue(Timestamp.valueOf("2025-02-10 14:45:00"), Timestamp.valueOf("2025-02-10 09:15:00"))` → `false` |
-| **esMenorQue** (Timestamp) | `Timestamp fechaInicio, Timestamp fechaFin` | `esMenorQue(Timestamp.valueOf("2025-02-05 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))` → `true` | `esMenorQue(Timestamp.valueOf("2025-02-15 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))` → `false` | `esMenorQue(Timestamp.valueOf("2025-02-10 08:20:00"), Timestamp.valueOf("2025-02-10 16:50:00"))` → `false` |
-| **esIgualQue** (Timestamp) | `Timestamp fechaInicio, Timestamp fechaFin` | `esIgualQue(Timestamp.valueOf("2025-02-10 10:30:00"), Timestamp.valueOf("2025-02-10 10:30:00"))` → `true` | `esIgualQue(Timestamp.valueOf("2025-02-10 10:30:00"), Timestamp.valueOf("2025-02-15 10:30:00"))` → `false` | `esIgualQue(Timestamp.valueOf("2025-02-15 08:00:00"), Timestamp.valueOf("2025-02-15 22:30:00"))` → `true` |
-| **esMayorQue** (Date) | `Date fechaInicio, Date fechaFin` | `esMayorQue(Date.valueOf("2025-02-15"), Date.valueOf("2025-02-10"))` → `true` | `esMayorQue(Date.valueOf("2025-02-05"), Date.valueOf("2025-02-10"))` → `false` | `esMayorQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))` → `false` |
-| **esMenorQue** (Date) | `Date fechaInicio, Date fechaFin` | `esMenorQue(Date.valueOf("2025-02-05"), Date.valueOf("2025-02-10"))` → `true` | `esMenorQue(Date.valueOf("2025-02-15"), Date.valueOf("2025-02-10"))` → `false` | `esMenorQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))` → `false` |
-| **esIgualQue** (Date) | `Date fechaInicio, Date fechaFin` | `esIgualQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-10"))` → `true` | `esIgualQue(Date.valueOf("2025-02-10"), Date.valueOf("2025-02-15"))` → `false` | `esIgualQue(Date.valueOf("2025-02-20"), Date.valueOf("2025-02-20"))` → `true` |
+## Documentación
 
-## Métodos de Conversor De Fechas
-
-| Método | Parámetros | Ejemplo 1 | Ejemplo 2 | Ejemplo 3 (Casos especiales) |
-|--------|-----------|----------|----------|----------|
-| **convertirFecha** | `String fecha, String formatoEntrada, String formatoSalida` | `convertirFecha("15/02/2025", "dd/MM/yyyy", "yyyy-MM-dd")` → `"2025-02-15"` | `convertirFecha("2025-02-10", "yyyy-MM-dd", "dd/MM/yyyy")` → `"10/02/2025"` | `convertirFecha("01/01/0001", "dd/MM/yyyy", "yyyy-MM-dd")` → `"0001-01-01"` |
-| **convertirStringATimestamp** | `String fecha, String formatoEntrada` | `convertirStringATimestamp("15/02/2025 14:30:45", "dd/MM/yyyy HH:mm:ss")` → `Timestamp(2025-02-15 14:30:45)` | `convertirStringATimestamp("2025-02-10 09:15:00", "yyyy-MM-dd HH:mm:ss")` → `Timestamp(2025-02-10 09:15:00)` | `convertirStringATimestamp("0", "dd/MM/yyyy HH:mm:ss")` → `Timestamp(0001-01-01 00:00:00)` |
-| **convertirStringADate** | `String fecha, String formatoEntrada` | `convertirStringADate("15/02/2025", "dd/MM/yyyy")` → `Date(2025-02-15)` | `convertirStringADate("2025-02-10", "yyyy-MM-dd")` → `Date(2025-02-10)` | `convertirStringADate("", "dd/MM/yyyy")` → `Date(0001-01-01)` |
-| **convertirTimestampAString** | `Timestamp fecha, String formatoSalida` | `convertirTimestampAString(Timestamp.valueOf("2025-02-15 14:30:00"), "dd/MM/yyyy HH:mm:ss")` → `"15/02/2025 14:30:00"` | `convertirTimestampAString(Timestamp.valueOf("2025-02-10 09:15:00"), "yyyy-MM-dd")` → `"2025-02-10"` | `convertirTimestampAString(Timestamp.valueOf("0001-01-01 00:00:00"), "dd/MM/yyyy")` → `""` |
-| **convertirDateAString** | `Date fecha, String formatoSalida` | `convertirDateAString(Date.valueOf("2025-02-15"), "dd/MM/yyyy")` → `"15/02/2025"` | `convertirDateAString(Date.valueOf("2025-02-10"), "yyyy-MM-dd")` → `"2025-02-10"` | `convertirDateAString(Date.valueOf("0001-01-01"), "dd/MM/yyyy")` → `""` |
-| **convertirTimestampADate** | `Timestamp fecha` | `convertirTimestampADate(Timestamp.valueOf("2025-02-15 14:30:00"))` → `Date(2025-02-15)` | `convertirTimestampADate(Timestamp.valueOf("2025-02-10 09:15:00"))` → `Date(2025-02-10)` | `convertirTimestampADate(Timestamp.valueOf("0001-01-01 00:00:00"))` → `Date(0001-01-01)` |
-| **convertirDateATimestamp** | `Date fecha` | `convertirDateATimestamp(Date.valueOf("2025-02-15"))` → `Timestamp(2025-02-15 00:00:00)` | `convertirDateATimestamp(Date.valueOf("2025-02-10"))` → `Timestamp(2025-02-10 00:00:00)` | `convertirDateATimestamp(Date.valueOf("0001-01-01"))` → `Timestamp(0001-01-01 00:00:00)` |
-
-## Cobertura de Tests
-
-| Clase | Instrucciones | Ramas | Líneas | Complejidad | Métodos |
-|---|---|---|---|---|---|
-| **ComparadorDeFechas** | 98.98% | 77.03% | 97.06% | 75.36% | 100% |
-| **ConversorDeFechas** | 100% | 100% | 100% | 100% | 100% |
-| **TOTAL** | 99.25% | 82.65% | 97.80% | 80.90% | 100% |
-
-**Total de tests**: 54 pruebas, todas pasando ✅
-**Última actualización**: 08 de Febrero de 2026
+- [Métodos ComparadorDeFechas](Comparador_de_fechas.md)
+- [Métodos ConversorDeFechas](Conversor_de_fechas.md)
+- [Cobertura de Tests](Cobertura.md)
